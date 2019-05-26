@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jd.cc</groupId>
+    <artifactId>cc-tools</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>cc-tools</name>
+    <url>http://maven.apache.org</url>
+    <properties>
+        <maven.build.timestamp.format>yyyy-MM-dd_HH-mm-ss</maven.build.timestamp.format>
+        <maven-dependency-plugin.version>2.1</maven-dependency-plugin.version>
+        <maven-surefire-plugin.version>2.12.4</maven-surefire-plugin.version>
+
+        <spring.version>3.2.0.RELEASE</spring.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <junit.version>4.4</junit.version>
+        <servlet-api.version>2.5</servlet-api.version>
+        <fastjson.version>1.1.31.sec01</fastjson.version>
+        <maven-source-plugin.version>2.1</maven-source-plugin.version>
+        <commons-collections.version>3.2</commons-collections.version>
+        <gson.version>2.1</gson.version>
+        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+        <commons-lang3.version>3.3.2</commons-lang3.version>
+        <spring-webmvc.version>3.2.0.RELEASE</spring-webmvc.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-webmvc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>cc-tools</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+
+        <resources>
+            <resource>
+                <directory>src/main/webapp/WEB-INF</directory>
+                <includes>
+                    <include>libraPages/*.*</include>
+                    <include>libraStatics/**/*.*</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
+                <configuration>
+                    <outputDirectory>src/main/webapp/WEB-INF/lib</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--<plugin>
+
+                <artifactId>maven-source-plugin</artifactId>
+
+                <version>3.0.1</version>
+
+                <configuration>
+
+                    <attach>true</attach>
+
+                </configuration>
+
+                <executions>
+
+                    <execution>
+
+                        <phase>compile</phase>
+
+                        <goals>
+
+                            <goal>jar</goal>
+
+                        </goals>
+
+                    </execution>
+
+                </executions>
+
+            </plugin>-->
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>libs-snapshots</id>
+            <name>libs-snapshots-local</name>
+            <url>http://artifactory.jd.com/libs-snapshots-local</url>
+        </repository>
+    </distributionManagement>
+
+</project>
